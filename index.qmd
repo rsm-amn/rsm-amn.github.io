@@ -1,0 +1,18 @@
+---
+title: "Aman Sharma"
+image: "images/Screenshot 2025-04-05 at 9.57.43 PM.png"
+about:
+    template: jolla
+    links: 
+      - icon: envelope
+        href: mailto:amn@ucsd.edu
+      - icon: linkedin
+        href: https://www.linkedin.com/in/aman2139/
+---
+
+Here is a paragraph about me!
+
+Aman is a graduate Business Analytics student at UC San Diego with a strong foundation in economics, data analytics, and strategic problem-solving. His diverse experience spans both public and private sectors, where he has worked in data management, market analysis, and operational strategy. Skilled in Excel, SQL, Python, and business intelligence tools like Tableau, he has applied these technical abilities in real-world projects and internships, refining his ability to translate complex data into actionable insights.
+
+With a passion for business strategy and consulting, Aman has worked on projects with firms like UrbanCompany and various government institutions, where he gained firsthand experience in optimizing operations, scaling initiatives, and solving business challenges using data. As the founder of the only graduate-level consulting club at UC San Diego, he has led efforts to connect students with industry leaders, develop case-solving frameworks, and grow the club to 150+ members in just four months. His career goal is to leverage analytics, problem-solving, and cross-functional collaboration to help organizations navigate complex challenges and drive growth.
+

@@ -1,0 +1,6 @@
+---
+title: "Resume"
+---
+
+{{< pdf Resume_Aman2025.pdf
+width=100% height=800 >}}
