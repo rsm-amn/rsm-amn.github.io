@@ -1,9 +1,25 @@
 # This is Project 1
 
-## Section 1: Datal
+---
+title: "Analysis of Cars"
+author: Your Name
+date: today
+---
 
-I cleaned some data
+# Header
 
-## Section 2: Analysis
+Let's investigate the relationship between fuel efficiency (`mpg`) and engine displacement (`disp`) from the `mtcars` dataset. Those variables have a correlation of `r cor(mtcars$mpg, mtcars$disp) |> format(digits=2)`.
 
-I analyzed the data
+## Sub-Header
+
+Here is a plot:
+
+```{r}
+#| message: false 
+
+library(tidyverse)
+data(mtcars)
+mtcars |>
+  ggplot(aes(mpg, disp)) + 
+  geom_point(color="dodgerblue4", size=2)
+```
