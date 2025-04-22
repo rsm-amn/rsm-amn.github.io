@@ -18,7 +18,7 @@ This project seeks to replicate their results.
 ## Data
 ```{r}
 library(haven)
-data <- read_dta("blog/project3/karlan_list_2007.dta")
+data <- read_dta("karlan_list_2007.dta")
 ```
 
 ### Description
@@ -28,7 +28,6 @@ data <- read_dta("blog/project3/karlan_list_2007.dta")
 ## Load libraries
 library(haven)
 library(dplyr)
-library(skimr)
 library(ggplot2)
 
 # Read the data
