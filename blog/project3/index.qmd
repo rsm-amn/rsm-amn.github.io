@@ -250,13 +250,16 @@ t_stat_r2_r3 <- (mean(r3) - mean(r2)) / sqrt(var(r3)/length(r3) + var(r2)/length
 
 # Output
 t_stat_r1_r2
+```
 
 This value is well below 1.96, the threshold for statistical significance at the 95% confidence level.So, No, the 2:1 match does not significantly increase the donation rate compared to 1:1.
 
+```{r}
+
 t_stat_r2_r3
 
-This is even closer to zero, showing almost no difference between the 2:1 and 3:1 match rates.
 ```
+This is even closer to zero, showing almost no difference between the 2:1 and 3:1 match rates.
 
 ```{r}
 #_todo: Assess the same issue using a regression. Specifically, create the variable `ratio1` then regress `gave` on `ratio1`, `ratio2`, and `ratio3` (or alternatively, regress `gave` on the categorical variable `ratio`). Interpret the coefficients and their statistical precision._
@@ -506,5 +509,3 @@ n = 1000: The distribution is narrow and centered near the true effect (~0.004).
 These plots demonstrate that:
 With small sample sizes, statistical noise overwhelms the signal — it's hard to detect real effects.
 As the sample size grows, the distribution of estimated differences narrows and zero moves into the tail, giving us more confidence in detecting true effects. This visualizes why large samples are crucial in experiments, especially when the effect size is small — like in this charitable giving study.
-
-
