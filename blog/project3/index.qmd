@@ -18,7 +18,7 @@ This project seeks to replicate their results.
 ## Data
 ```{r}
 library(haven)
-data <- read_dta("blog/project3/karlan_list_2007.dta")
+data <- read_dta("/Users/amansharma/amn_website/amn_website/blog/project3/karlan_list_2007.dta")
 ```
 
 ### Description
