@@ -121,15 +121,19 @@ control <- filter(data, treatment == 0)
 ```
 ```{r}
 # Variable 1: Months since last donation (mrm2)
-mean_diff_mrm2 <- mean(treat$mrm2) - mean(control$mrm2)
-se_mrm2 <- sqrt(var(treat$mrm2)/nrow(treat) + var(control$mrm2)/nrow(control))
+mean_diff_mrm2 <- mean(treat$mrm2, na.rm = TRUE) - mean(control$mrm2, na.rm = TRUE)
+se_mrm2 <- sqrt(var(treat$mrm2, na.rm = TRUE)/nrow(treat) +
+                var(control$mrm2, na.rm = TRUE)/nrow(control))
 t_stat_mrm2 <- mean_diff_mrm2 / se_mrm2
+
 ```
 ```{r}
 # Variable 2: Highest previous contribution (hpa)
-mean_diff_hpa <- mean(treat$hpa) - mean(control$hpa)
-se_hpa <- sqrt(var(treat$hpa)/nrow(treat) + var(control$hpa)/nrow(control))
+mean_diff_hpa <- mean(treat$hpa, na.rm = TRUE) - mean(control$hpa, na.rm = TRUE)
+se_hpa <- sqrt(var(treat$hpa, na.rm = TRUE)/nrow(treat) +
+               var(control$hpa, na.rm = TRUE)/nrow(control))
 t_stat_hpa <- mean_diff_hpa / se_hpa
+
 ```
 ```{r}
 # Display t-stats
