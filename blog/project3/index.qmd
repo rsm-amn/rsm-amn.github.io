@@ -21,23 +21,42 @@ library(haven)
 data <- read_dta("/Users/amansharma/amn_website/amn_website/blog/project3/karlan_list_2007.dta")
 ```
 
+:::: {.callout-note collapse="true"}
 ### Description
 ```{r}
-## Load libraries
+# Load packages
 library(haven)
 library(dplyr)
 library(ggplot2)
 library(skimr)
-# Read the data
-data <- read_dta("karlan_list_2007.dta")
+library(janitor)
+library(gt)  
+# Read and clean data
+data <- read_dta("karlan_list_2007.dta") %>%
+  clean_names()
 
-# View structure of the dataset
-str(data)
+# Glimpse structure
+glimpse(data)
 
-# Quick summary of numeric and categorical variables
+# Skim summary
 skim(data)
 
+# Summary table (main dashboard)
+summary_table <- data %>%
+  summarise(
+    `Total Observations` = n(),
+    `Treatment Share` = mean(treatment),
+    `Donation Rate` = mean(gave),
+    `Average Donation (all)` = mean(amount, na.rm = TRUE),
+    `Average Donation (if gave)` = mean(amount[gave == 1], na.rm = TRUE)
+  ) %>%
+  gt() %>%
+  fmt_percent(columns = c(2, 3), decimals = 1) %>%
+  fmt_number(columns = 4:5, decimals = 2)
 
+summary_table
+
+# Group-level summary
 data %>%
   group_by(treatment) %>%
   summarise(
@@ -45,8 +64,8 @@ data %>%
     avg_donation = mean(amount),
     n = n()
   )
-
 ```
+::::
 :::: {.callout-note collapse="true"}
 ### Variable Definitions
 
@@ -150,12 +169,14 @@ tidy(model_mrm2)
 model_hpa <- lm(hpa ~ treatment, data = data)
 tidy(model_hpa)
 ```
-
+::: {.callout-note}
 Table 1 in Karlan & List (2007) reports summary statistics by treatment and control to:
+
 1. Show that randomization succeeded — groups look balanced.
 2. Build confidence that observed outcome differences are due to the treatment, not confounders.
 
 This is standard in field experiments and pre-registered RCTs — a "sanity check" for the experiment’s internal validity.
+:::
 
 ## Experimental Results
 
@@ -204,17 +225,20 @@ t_stat
 ols_model <- lm(gave ~ treatment, data = data)
 summary(ols_model)
 ```
+::: {.callout-note}
 We ran a regression to see whether offering a matching donation increases the likelihood that someone donates. The model tells us that:
 
 People who were offered a match were more likely to donate than those who weren’t. This difference, while small, is statistically significant — meaning it’s unlikely to have happened by random chance. In plain terms: offering a match nudges more people into action.
 
 Even though the actual increase in donation probability is modest, it is consistent across a large sample and enough to be detectable with statistical tools. This supports the idea that small behavioral cues — like knowing your gift will be matched — can meaningfully change human behavior.
+:::
 
 ```{r}
 # Probit model
 probit_model <- glm(gave ~ treatment, data = data, family = binomial(link = "probit"))
 summary(probit_model)
 ```
+::: {.callout-note}
 In the paper, Table 3 Column 1 reports:
 
 A positive and significant coefficient on treatment (around 0.087), Showing that being offered a match increases the probability of donating, even in a nonlinear probit model.
@@ -227,6 +251,7 @@ Statistically significant at the 1% level, Exactly what the authors report.
 
 Even when we use a more sophisticated statistical model (probit), the result still holds:
 People who received a matching offer were significantly more likely to donate. This finding confirms that behavioral nudges like match offers can shape real-world decisions, even when the actual incentive is small.
+:::
 
 ### Differences between Match Rates
 
@@ -251,8 +276,9 @@ t_stat_r2_r3 <- (mean(r3) - mean(r2)) / sqrt(var(r3)/length(r3) + var(r2)/length
 # Output
 t_stat_r1_r2
 ```
-
+::: {.callout-note}
 This value is well below 1.96, the threshold for statistical significance at the 95% confidence level.So, No, the 2:1 match does not significantly increase the donation rate compared to 1:1.
+:::
 
 ```{r}
 
@@ -279,19 +305,17 @@ summary(model_ratios)
 model_factor <- lm(gave ~ factor(ratio), data = match_data)
 summary(model_factor)
 ```
+::: {.callout-note}
 To test whether larger match ratios increase the likelihood of donating, I ran a regression where the outcome was whether someone gave (gave), and the key predictors were the match ratio levels: 1:1, 2:1, and 3:1.
 
 I used two approaches:
 1. Dummy variables for ratio2 and ratio3 (with ratio1 as the baseline),
 2. A factor variable for match ratio (same result, just different syntax).
 
-The base group is those who received a 1:1 match offer. The coefficients are very small (under 0.2 percentage points), and The p-values are well above 0.05, meaning the differences are not statistically significant.
+The base group is those who received a 1:1 match offer. The coefficients are very small (under 0.2 percentage points), and The p-values are well above 0.05, meaning the differences are not statistically significant. People who received a 2:1 or 3:1 match were not more likely to donate than those who received a 1:1 match. The regression confirms that increasing the match ratio doesn’t meaningfully change behavior.
 
-People who received a 2:1 or 3:1 match were not more likely to donate than those who received a 1:1 match. The regression confirms that increasing the match ratio doesn’t meaningfully change behavior.
-
-These findings support the paper’s conclusion: the presence of a match increases giving, but larger match sizes don’t matter.
-
-This insight has practical value for fundraisers: there’s no added benefit to offering a more generous match ratio — just having a match is what counts.
+These findings support the paper’s conclusion: the presence of a match increases giving, but larger match sizes don’t matter. This insight has practical value for fundraisers: there’s no added benefit to offering a more generous match ratio — just having a match is what counts.
+:::
 
 ```{r}
 
@@ -313,15 +337,14 @@ response_rates <- match_data %>%
 
 response_rates
 ```
-
+::: {.callout-note}
 The 2:1 match increased giving by 0.19 percentage points over 1:1.
 The 3:1 match increased it by just 0.01 percentage points over 2:1.
 
 Whether we look at the raw data or the regression model, we find that increasing the match ratio from 1:1 to 2:1, or from 2:1 to 3:1, produces minimal and statistically insignificant increases in donation rates.
 
-This confirms the central message in Karlan & List (2007):
-
-“The presence of a match increases giving, but making it more generous doesn’t help.” Fundraisers don’t need to secure a 3:1 match to succeed — just having any match at all is effective.
+This confirms the central message in Karlan & List (2007): “The presence of a match increases giving, but making it more generous doesn’t help.” Fundraisers don’t need to secure a 3:1 match to succeed — just having any match at all is effective.
+:::
 
 ### Size of Charitable Contribution
 
@@ -335,14 +358,11 @@ t.test(amount ~ treatment, data = data)
 model_uncond <- lm(amount ~ treatment, data = data)
 summary(model_uncond)
 ```
-The average donation in the control group was $0.81
-The average in the treatment group was $0.97
+::: {.callout-note}
+The average donation in the control group was $0.81 and the average in the treatment group was $0.97. The difference of about 15 cents is only marginally significant (just above p = 0.05)
 
-The difference of about 15 cents is only marginally significant (just above p = 0.05)
-
-People who received a match offer gave slightly more on average, but the increase is not statistically strong enough to rule out random chance at conventional thresholds. This suggests that most of the effect of the treatment comes from getting more people to donate at all, rather than getting people to donate larger amounts.
-
-So, Offering a match works by increasing participation, not by increasing generosity. The regression confirms the direction of the effect is positive, but it’s small and imprecise.
+People who received a match offer gave slightly more on average, but the increase is not statistically strong enough to rule out random chance at conventional thresholds. This suggests that most of the effect of the treatment comes from getting more people to donate at all, rather than getting people to donate larger amounts. So, Offering a match works by increasing participation, not by increasing generosity. The regression confirms the direction of the effect is positive, but it’s small and imprecise.
+:::
 
 ```{r}
 # Filter to donors only
@@ -355,14 +375,11 @@ t.test(amount ~ treatment, data = donors)
 model_cond <- lm(amount ~ treatment, data = donors)
 summary(model_cond)
 ```
-The average donation in the control group was $0.81
-The average in the treatment group was $0.97
+::: {.callout-note}
+Among people who actually made a donation, the average gift in the control group was $45.54, while the average in the treatment group was slightly lower at $43.87. The difference of about $1.67 is not statistically significant (p ≈ 0.56), meaning we can’t confidently say this difference is due to the treatment rather than random variation. 
 
-The difference of about 15 cents is only marginally significant (just above p = 0.05)
-
-People who received a match offer gave slightly more on average, but the increase is not statistically strong enough to rule out random chance at conventional thresholds. This suggests that most of the effect of the treatment comes from getting more people to donate at all, rather than getting people to donate larger amounts.
-
-So, Offering a match works by increasing participation, not by increasing generosity. The regression confirms the direction of the effect is positive, but it’s small and imprecise.
+This suggests that while offering a match encourages more people to give overall, it does not make those who were already inclined to donate give more. In other words, the match boosts participation, not generosity. Because this analysis only includes donors, it doesn't have a clean causal interpretation—but it supports the broader conclusion that matching works primarily by expanding the donor base, not by increasing donation size.
+:::
 
 ```{r}
 library(ggplot2)
@@ -432,11 +449,13 @@ ggplot(data.frame(n = 1:10000, cum_avg = cum_avg), aes(x = n, y = cum_avg)) +
   theme_minimal()
 
 ```
+::: {.callout-note}
 This plot shows how the cumulative average of simulated differences in donation rates between the treatment and control groups behaves as we increase the number of simulated pairs.
 
 Early in the plot (with few observations), the cumulative average is highly volatile — it swings up and down because small samples are noisy. As more pairs are simulated, the line settles and smooths out, converging toward the true average treatment effect (0.004), marked by the red dashed line.
 
 By the time we reach several thousand observations, the cumulative average stays consistently close to 0.004, illustrating the Law of Large Numbers in action. As the number of simulations grows, the cumulative average stabilizes and approaches the true difference in means — exactly what LLN predicts.
+:::
 
 ### Central Limit Theorem
 ```{r}
@@ -486,6 +505,7 @@ ggplot(sim_results, aes(x = diff)) +
   theme_minimal()
 
 ```
+::: {.callout-note}
 n = 50: The distribution is wide and irregular, and zero is near the center. This means we can't reliably detect a treatment effect with such small samples.
 
 n = 200: The shape becomes more symmetric and normal, but zero is still well within the main bulk, suggesting limited power.
@@ -495,5 +515,7 @@ n = 500: The distribution tightens, and we begin to see a slight shift away from
 n = 1000: The distribution is narrow and centered near the true effect (~0.004). Now, zero is closer to the tail, indicating we’d likely reject the null in a real hypothesis test.
 
 These plots demonstrate that:
+
 With small sample sizes, statistical noise overwhelms the signal — it's hard to detect real effects.
 As the sample size grows, the distribution of estimated differences narrows and zero moves into the tail, giving us more confidence in detecting true effects. This visualizes why large samples are crucial in experiments, especially when the effect size is small — like in this charitable giving study.
+:::
