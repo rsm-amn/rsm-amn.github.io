@@ -1,0 +1,366 @@
+---
+title: "Poisson Regression Examples"
+author: "Aman Sharma"
+date: today
+callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
+---
+
+## Blueprinty Case Study
+
+### Introduction
+
+Blueprinty is a small firm that makes software for developing blueprints specifically for submitting patent applications to the US patent office. Their marketing team would like to make the claim that patent applicants using Blueprinty's software are more successful in getting their patent applications approved. Ideal data to study such an effect might include the success rate of patent applications before using Blueprinty's software and after using it. Unfortunately, such data is not available. 
+
+However, Blueprinty has collected data on 1,500 mature (non-startup) engineering firms. The data include each firm's number of patents awarded over the last 5 years, regional location, age since incorporation, and whether or not the firm uses Blueprinty's software. The marketing team would like to use this data to make the claim that firms using Blueprinty's software are more successful in getting their patent applications approved.
+
+
+### Data
+
+```{r}
+library(tidyverse)
+library(readr)
+
+blueprinty <- read_csv("/Users/amansharma/amn_website/amn_website/blog/project4/blueprinty.csv")
+
+glimpse(blueprinty)
+```
+
+```{r}
+# Histogram: patents by customer status
+ggplot(blueprinty, aes(x = patents, fill = factor(iscustomer))) +
+  geom_histogram(binwidth = 1, position = "dodge", color = "white") +
+  scale_fill_manual(values = c("#1b9e77", "#d95f02"), labels = c("Non-customer", "Customer")) +
+  labs(
+    title = "Patent Counts by Customer Status",
+    x = "Number of Patents (Last 5 Years)",
+    y = "Number of Firms",
+    fill = "Customer Status"
+  ) +
+  theme_minimal()
+
+```  
+On average, Blueprinty no-customers hold more patents than the customers. The histogram shows this pattern visually, while the summary statistics confirm that the mean patent count is higher among non customers.
+
+Most firms in both groups have between 1 and 6 patents, with the peak around 3–4 patents.
+
+The green bars (non-customers) dominate in the lower patent count range (e.g., 0 to 2 patents).
+
+The orange bars (customers) are relatively more concentrated in the mid to higher ranges (e.g., 4 to 9 patents).
+
+At the extreme end (e.g., 10+ patents), both groups taper off, but Blueprinty customers are slightly more represented.
+
+The distribution of customer firms is shifted right, indicating higher patent activity. This supports the marketing claim that customers may be more successful—but it also highlights the need to control for possible confounders like firm age or region before attributing this difference solely to software use.
+
+```{r}
+# Boxplot of firm age
+ggplot(blueprinty, aes(x = factor(iscustomer), y = age)) +
+  geom_boxplot(fill = "#7570b3") +
+  labs(
+    title = "Firm Age by Customer Status",
+    x = "Customer Status (0 = No, 1 = Yes)",
+    y = "Firm Age (Years)"
+  ) +
+  theme_minimal()
+```
+This boxplot compares the age of firms (in years since incorporation) between Blueprinty customers (1) and non-customers (0).
+
+We can see that the median firm age is slightly higher among customers than non-customers. Both groups have similar spreads, with interquartile ranges (middle 50%) centered roughly between 20 and 35 years.
+
+The overall distribution shows that customers tend to be just a bit older, though there's substantial overlap. There is at least one mild outlier in the non-customer group (a firm around 49–50 years old).
+
+Firms using Blueprinty's software tend to be slightly older on average than non-customers. This may indicate that more established or mature firms are more likely to adopt Blueprinty's product. Since age may correlate with experience, resources, or patenting success, this is an important confounding variable to consider in any analysis that tries to isolate the effect of being a customer.
+
+### Estimation of Simple Poisson Model
+
+Since our outcome variable of interest can only be small integer values per a set unit of time, we can use a Poisson density to model the number of patents awarded to each engineering firm over the last 5 years. We start by estimating a simple Poisson model via Maximum Likelihood.
+
+```{r}
+poisson_loglikelihood <- function(lambda, Y) {
+  if (lambda <= 0) return(-Inf)
+  sum(-lambda + Y * log(lambda) - lgamma(Y + 1))
+}
+```
+```{r}
+# Poisson log-likelihood function
+poisson_loglikelihood <- function(lambda, Y) {
+  if (lambda <= 0) return(-Inf)  # enforce valid domain
+  ll <- sum(dpois(Y, lambda, log = TRUE))
+  return(ll)
+}
+```
+
+```{r}
+# Make sure your function is defined
+poisson_loglikelihood <- function(lambda, Y) {
+  if (lambda <= 0) return(-Inf)
+  sum(-lambda + Y * log(lambda) - lgamma(Y + 1))
+}
+
+# Use observed Y
+Y <- blueprinty$patents
+
+# Range of lambda values to try
+lambda_vals <- seq(0.5, 10, by = 0.1)
+
+# Calculate log-likelihood for each lambda
+loglik_vals <- sapply(lambda_vals, function(l) poisson_loglikelihood(l, Y))
+
+# Create data frame for plotting
+loglik_df <- data.frame(lambda = lambda_vals, log_likelihood = loglik_vals)
+
+# Plot
+library(ggplot2)
+ggplot(loglik_df, aes(x = lambda, y = log_likelihood)) +
+  geom_line(color = "#1b9e77", linewidth = 1.2) +
+  labs(
+    title = "Poisson Log-Likelihood for Lambda",
+    x = expression(lambda),
+    y = "Log-Likelihood"
+  ) +
+  theme_minimal()
+```
+
+_todo: If you're feeling mathematical, take the first derivative of your likelihood or log-likelihood, set it equal to zero and solve for lambda. You will find lambda_mle is Ybar, which "feels right" because the mean of a Poisson distribution is lambda._
+
+```{r}
+# Negative log-likelihood for use with optim()
+neg_poisson_loglikelihood <- function(lambda, Y) {
+  if (lambda <= 0) return(Inf)
+  -sum(dpois(Y, lambda, log = TRUE))  # or use manual formula
+}
+
+# Run optimization
+mle_result <- optim(
+  par = 1,                      # initial guess
+  fn = neg_poisson_loglikelihood,
+  Y = blueprinty$patents,
+  method = "Brent",             # bounded method
+  lower = 0.001,
+  upper = 20
+)
+
+# View results
+mle_result$par      # MLE for lambda
+mle_result$value    # negative log-likelihood at MLE
+```
+
+
+### Estimation of Poisson Regression Model
+
+Next, we extend our simple Poisson model to a Poisson Regression Model such that $Y_i = \text{Poisson}(\lambda_i)$ where $\lambda_i = \exp(X_i'\beta)$. The interpretation is that the success rate of patent awards is not constant across all firms ($\lambda$) but rather is a function of firm characteristics $X_i$. Specifically, we will use the covariates age, age squared, region, and whether the firm is a customer of Blueprinty.
+
+```{r}
+poisson_regression_loglikelihood <- function(beta, Y, X) {
+  lambda <- exp(X %*% beta)  # vector of lambda_i values
+  loglik <- sum(Y * log(lambda) - lambda - lgamma(Y + 1))
+  return(-loglik)  # Negative for use with optim()
+}
+# Load model matrix
+blueprinty <- blueprinty %>%
+  mutate(age2 = age^2)  # add age squared manually
+
+# Outcome variable
+Y <- blueprinty$patents
+
+# Model matrix with intercept
+X <- model.matrix(~ age + age2 + region + iscustomer, data = blueprinty)
+```
+
+```{r}
+# Add age squared
+blueprinty <- blueprinty %>%
+  mutate(age2 = age^2)
+
+# Create model matrix X: includes intercept, age, age^2, region dummies, and iscustomer
+X <- model.matrix(~ age + age2 + region + iscustomer, data = blueprinty)
+
+# Outcome vector
+Y <- blueprinty$patents
+
+
+# Negative log-likelihood function
+poisson_regression_loglikelihood <- function(beta, Y, X) {
+  lambda <- exp(X %*% beta)
+  -sum(Y * log(lambda) - lambda - lgamma(Y + 1))  # negative for minimization
+}
+
+# Initial values (0s)
+beta_start <- rep(0, ncol(X))
+
+# Estimate beta using optim
+mle_result <- optim(
+  par = beta_start,
+  fn = poisson_regression_loglikelihood,
+  Y = Y,
+  X = X,
+  method = "BFGS",
+  hessian = TRUE
+)
+
+# Extract coefficients and variance-covariance matrix
+beta_hat <- mle_result$par
+vcov_mat <- solve(mle_result$hessian)
+se_beta <- sqrt(diag(vcov_mat))
+
+# Create coefficient table
+library(tibble)
+library(gt)
+
+coef_table <- tibble(
+  Term = colnames(X),
+  Estimate = beta_hat,
+  Std_Error = se_beta
+) %>%
+  gt() %>%
+  fmt_number(columns = c(Estimate, Std_Error), decimals = 4)
+
+coef_table
+
+glm_model <- glm(patents ~ age + I(age^2) + region + iscustomer,
+                 data = blueprinty, family = poisson())
+
+summary(glm_model)
+```
+The Poisson regression results suggest that firm age is a strong and significant predictor of patent output. Specifically, each additional year of age is associated with a 12% increase in expected patent counts, though this effect diminishes over time as indicated by the negative coefficient on age squared. Regional differences (compared to the Midwest baseline) do not appear to significantly affect patenting activity. Importantly, the coefficient on the `iscustomer` variable is positive and marginally significant, indicating that firms using Blueprinty’s software tend to have about 6% more patents on average, holding other factors constant. While this result is not strongly conclusive, it does lend modest support to Blueprinty's marketing claim that its customers are more successful in obtaining patents.
+
+```{r}
+# Predicted lambda = exp(X %*% beta_hat)
+# Make two counterfactual datasets
+X_0 <- X
+X_1 <- X
+
+# Set all iscustomer values
+X_0[, "iscustomer"] <- 0
+X_1[, "iscustomer"] <- 1
+
+# Predicted lambda values
+y_pred_0 <- exp(X_0 %*% beta_hat)
+y_pred_1 <- exp(X_1 %*% beta_hat)
+
+# Estimate average treatment effect
+ate <- mean(y_pred_1 - y_pred_0)
+ate
+```
+
+Using the estimated Poisson regression model, we simulated expected patent counts for each firm under two scenarios: one where every firm is a Blueprinty customer and one where no firm is. On average, firms that use Blueprinty are predicted to have **0.22 more patents** over the past five years than they would have had without the software, holding all else equal. While this is a modest difference, it represents a **meaningful relative increase** in expected patent output and provides evidence consistent with Blueprinty’s marketing claim that its customers are more successful in securing patents. However, because this is based on observational data, we cannot fully rule out the possibility that unobserved differences between customers and non-customers are influencing the result.
+
+
+## AirBnB Case Study
+
+### Introduction
+
+AirBnB is a popular platform for booking short-term rentals. In March 2017, students Annika Awad, Evan Lebo, and Anna Linden scraped of 40,000 Airbnb listings from New York City.  The data include the following variables:
+
+:::: {.callout-note collapse="true"}
+### Variable Definitions
+
+    - `id` = unique ID number for each unit
+    - `last_scraped` = date when information scraped
+    - `host_since` = date when host first listed the unit on Airbnb
+    - `days` = `last_scraped` - `host_since` = number of days the unit has been listed
+    - `room_type` = Entire home/apt., Private room, or Shared room
+    - `bathrooms` = number of bathrooms
+    - `bedrooms` = number of bedrooms
+    - `price` = price per night (dollars)
+    - `number_of_reviews` = number of reviews for the unit on Airbnb
+    - `review_scores_cleanliness` = a cleanliness score from reviews (1-10)
+    - `review_scores_location` = a "quality of location" score from reviews (1-10)
+    - `review_scores_value` = a "quality of value" score from reviews (1-10)
+    - `instant_bookable` = "t" if instantly bookable, "f" if not
+::::
+
+```{r}
+# Load packages
+library(tidyverse)
+library(readr)
+
+# Read data
+airbnb <- read_csv("/Users/amansharma/amn_website/amn_website/blog/project4/airbnb.csv")
+
+# Glimpse structure
+glimpse(airbnb)
+
+# Remove rows with missing values in relevant columns
+airbnb_clean <- airbnb %>%
+  drop_na(number_of_reviews, price, room_type, bedrooms, bathrooms,
+          review_scores_cleanliness, review_scores_location, review_scores_value,
+          instant_bookable)
+
+# Confirm cleaned data
+summary(airbnb_clean$number_of_reviews)
+```
+
+```{r}
+ggplot(airbnb_clean, aes(x = number_of_reviews)) +
+  geom_histogram(binwidth = 5, fill = "#1f77b4", color = "white") +
+  labs(title = "Distribution of Number of Reviews (Bookings Proxy)",
+       x = "Number of Reviews",
+       y = "Frequency") +
+  theme_minimal()
+```
+This histogram shows the distribution of the number of reviews across Airbnb listings in New York City, which is used as a proxy for the number of bookings.
+
+
+The distribution is heavily right-skewed, meaning the vast majority of listings have fewer than 50 reviews, with a large concentration around 0–10 reviews. A small number of listings have very high review counts (over 100 or even 200), but these are rare outliers.
+
+This shape is typical of count data with many low values and a long tail — making a Poisson regression model a reasonable choice for analysis.
+
+The shape of this distribution supports the use of Poisson or count-based regression methods, which assume non-negative integer outcomes and are particularly suited to modeling event counts like bookings or reviews. However, the presence of many zeros and high-variance may also suggest exploring overdispersion later, possibly with a negative binomial model if needed.
+
+```{r}
+ggplot(airbnb_clean, aes(x = room_type, y = number_of_reviews)) +
+  geom_boxplot(fill = "#2ca02c") +
+  labs(title = "Number of Reviews by Room Type",
+       x = "Room Type",
+       y = "Number of Reviews") +
+  theme_minimal()
+```
+This boxplot shows the distribution of the number of reviews (used as a proxy for bookings) across three different room types on Airbnb:
+
+1. Entire home/apartment
+
+2. Private room
+
+3. Shared room
+
+
+All three room types have a similar median number of reviews, generally falling in the 10–25 review range. Private rooms appear to have a slightly higher concentration of listings with very high review counts, as seen from the extended upper whisker and more extreme outliers. Shared rooms tend to have a slightly lower distribution overall, though still with some high-performing listings. There is a long tail in all categories — some listings in each room type have well over 300 reviews, suggesting a few very frequently booked or long-standing listings.
+
+Room type clearly plays a role in the distribution of reviews. While the medians are not dramatically different, the spread and number of high-review outliers vary across room types. This suggests that room type may have a nonlinear or interaction effect and should definitely be included as a predictor in any Poisson regression modeling of booking behavior.
+
+```{r}
+# Convert instant_bookable to binary
+airbnb_clean <- airbnb_clean %>%
+  mutate(instant_bookable = ifelse(instant_bookable == "t", 1, 0))
+
+# Fit Poisson regression
+model_airbnb <- glm(
+  number_of_reviews ~ price + bedrooms + bathrooms + room_type +
+    review_scores_cleanliness + review_scores_location +
+    review_scores_value + instant_bookable,
+  data = airbnb_clean,
+  family = poisson()
+)
+
+summary(model_airbnb)
+```
+
+This model estimates the number of reviews (used as a proxy for bookings) based on Airbnb listing characteristics. Several variables are statistically significant:
+
+1. Price has a small but significant negative effect: higher-priced listings tend to receive slightly fewer reviews, likely due to lower demand.
+
+2. Bedrooms is positively associated with reviews: more bedrooms lead to more bookings, likely reflecting group travel.
+
+3. Bathrooms surprisingly has a negative effect, which may indicate multicollinearity or that additional bathrooms don't drive bookings once room size is accounted for.
+
+4. Room Type: Listings categorized as Private rooms receive slightly more reviews than entire homes. Shared rooms receive significantly fewer reviews than entire homes.
+
+5. Review scores: Cleanliness has a strong positive association with bookings. Location and value have negative coefficients, possibly due to rating inflation (e.g., everyone gets 9s, so only lower scores stand out negatively).
+
+The variable instant_bookable was dropped due to multicollinearity (likely perfectly predicted by other variables or has no variation in part of the data).
+
+Listings with more bedrooms, higher cleanliness ratings, and those categorized as private rooms tend to receive more reviews. On the other hand, higher prices, shared rooms, and lower review scores for location and value are associated with fewer bookings. This model provides useful insights into what drives demand on Airbnb, with many predictors showing strong, statistically significant relationships.
+
+
+
+
