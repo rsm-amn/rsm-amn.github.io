@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aman Sharma">
+<meta name="dcterms.date" content="2025-06-11">
+
+<title>Machine Learning – Aman’s Website</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Aman’s Website</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a.-k-means" id="toc-a.-k-means" class="nav-link active" data-scroll-target="#a.-k-means">1a. K-Means</a></li>
+  <li><a href="#a.-k-nearest-neighbors" id="toc-a.-k-nearest-neighbors" class="nav-link" data-scroll-target="#a.-k-nearest-neighbors">2a. K Nearest Neighbors</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Machine Learning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aman Sharma </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 11, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="a.-k-means" class="level2">
+<h2 class="anchored" data-anchor-id="a.-k-means">1a. K-Means</h2>
+<p>We explore the Palmer Penguins dataset by applying K-Means clustering to identify natural groupings based on physical traits. The clustering is performed using two continuous morphological features: bill length and flipper length. We implement the K-Means algorithm manually, allowing us to visualize the movement of centroids over iterations. We also compare our implementation to the sklearn. KMeans function to ensure consistency and accuracy in our results.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Installing Dependencies
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="4f9eb9de" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>{sys.executable} <span class="op">-</span>m pip install pandas numpy matplotlib scikit<span class="op">-</span>learn shap minepy</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>{sys.executable} <span class="op">-</span>m pip install pyyaml</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>{sys.executable} <span class="op">-</span>m pip install nbformat nbclient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: pandas in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (2.3.0)
+Requirement already satisfied: numpy in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (2.0.2)
+Requirement already satisfied: matplotlib in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (3.9.4)
+Requirement already satisfied: scikit-learn in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (1.6.1)
+Requirement already satisfied: shap in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (0.47.2)
+Collecting minepy
+  Using cached minepy-1.2.6.tar.gz (496 kB)
+Requirement already satisfied: tzdata&gt;=2022.7 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from pandas) (2025.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from pandas) (2025.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: packaging&gt;=20.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: importlib-resources&gt;=3.2.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (6.5.2)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (1.3.0)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (3.2.3)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (1.4.7)
+Requirement already satisfied: pillow&gt;=8 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (11.2.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from matplotlib) (4.58.2)
+Requirement already satisfied: scipy&gt;=1.6.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from scikit-learn) (1.13.1)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: joblib&gt;=1.2.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from scikit-learn) (1.5.1)
+Requirement already satisfied: numba&gt;=0.54 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from shap) (0.60.0)
+Requirement already satisfied: cloudpickle in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from shap) (3.1.1)
+Requirement already satisfied: typing-extensions in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from shap) (4.14.0)
+Requirement already satisfied: tqdm&gt;=4.27.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from shap) (4.67.1)
+Requirement already satisfied: slicer==0.0.8 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from shap) (0.0.8)
+Requirement already satisfied: zipp&gt;=3.1.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from importlib-resources&gt;=3.2.0-&gt;matplotlib) (3.23.0)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from numba&gt;=0.54-&gt;shap) (0.43.0)
+Requirement already satisfied: six&gt;=1.5 in /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.15.0)
+Building wheels for collected packages: minepy
+  Building wheel for minepy (setup.py) ... - \ error
+  ERROR: Command errored out with exit status 1:
+   command: /Library/Developer/CommandLineTools/usr/bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/setup.py'"'"'; __file__='"'"'/private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' bdist_wheel -d /private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-wheel-tquluy37
+       cwd: /private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/
+  Complete output (59 lines):
+  running bdist_wheel
+  running build
+  running build_py
+  creating build
+  creating build/lib.macosx-10.9-universal2-3.9
+  creating build/lib.macosx-10.9-universal2-3.9/minepy
+  copying minepy/__init__.py -&gt; build/lib.macosx-10.9-universal2-3.9/minepy
+  running build_ext
+  building 'minepy.mine' extension
+  creating build/temp.macosx-10.9-universal2-3.9
+  creating build/temp.macosx-10.9-universal2-3.9/libmine
+  creating build/temp.macosx-10.9-universal2-3.9/minepy
+  clang -Wno-unused-result -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -fwrapv -O3 -Wall -iwithsysroot/System/Library/Frameworks/System.framework/PrivateHeaders -iwithsysroot/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Headers -arch arm64 -arch x86_64 -Werror=implicit-function-declaration -Wno-error=unreachable-code -Wno-error=unused-but-set-variable -Wno-error=cast-function-type-mismatch -Wno-unknown-warning-option -I/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9 -I/Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include -c libmine/mine.c -o build/temp.macosx-10.9-universal2-3.9/libmine/mine.o -Wall
+  clang -Wno-unused-result -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -fwrapv -O3 -Wall -iwithsysroot/System/Library/Frameworks/System.framework/PrivateHeaders -iwithsysroot/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Headers -arch arm64 -arch x86_64 -Werror=implicit-function-declaration -Wno-error=unreachable-code -Wno-error=unused-but-set-variable -Wno-error=cast-function-type-mismatch -Wno-unknown-warning-option -I/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9 -I/Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include -c minepy/mine.c -o build/temp.macosx-10.9-universal2-3.9/minepy/mine.o -Wall
+  In file included from minepy/mine.c:687:
+  In file included from /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/arrayobject.h:5:
+  In file included from /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/ndarrayobject.h:12:
+  In file included from /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/ndarraytypes.h:1909:
+  /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/npy_1_7_deprecated_api.h:17:2: warning: "Using deprecated NumPy API, disable it with "          "#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-W#warnings]
+     17 | #warning "Using deprecated NumPy API, disable it with " \
+        |  ^
+  minepy/mine.c:6287:41: error: no member named 'subarray' in 'struct _PyArray_Descr'
+   6287 |     __Pyx_INCREF(((PyObject*)__pyx_v_d-&gt;subarray-&gt;shape));
+        |                              ~~~~~~~~~  ^
+  minepy/mine.c:1294:37: note: expanded from macro '__Pyx_INCREF'
+   1294 |   #define __Pyx_INCREF(r) Py_INCREF(r)
+        |                                     ^
+  /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9/object.h:411:49: note: expanded from macro 'Py_INCREF'
+    411 | #define Py_INCREF(op) _Py_INCREF(_PyObject_CAST(op))
+        |                                                 ^~
+  /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9/object.h:112:41: note: expanded from macro '_PyObject_CAST'
+    112 | #define _PyObject_CAST(op) ((PyObject*)(op))
+        |                                         ^~
+  minepy/mine.c:6288:38: error: no member named 'subarray' in 'struct _PyArray_Descr'
+   6288 |     __pyx_r = ((PyObject*)__pyx_v_d-&gt;subarray-&gt;shape);
+        |                           ~~~~~~~~~  ^
+  minepy/mine.c:6386:31: error: no member named 'names' in 'struct _PyArray_Descr'
+   6386 |   if (unlikely(__pyx_v_descr-&gt;names == Py_None)) {
+        |                ~~~~~~~~~~~~~  ^
+  minepy/mine.c:879:43: note: expanded from macro 'unlikely'
+    879 |   #define unlikely(x) __builtin_expect(!!(x), 0)
+        |                                           ^
+  minepy/mine.c:6390:30: error: no member named 'names' in 'struct _PyArray_Descr'
+   6390 |   __pyx_t_1 = __pyx_v_descr-&gt;names; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+        |               ~~~~~~~~~~~~~  ^
+  minepy/mine.c:6409:33: error: no member named 'fields' in 'struct _PyArray_Descr'
+   6409 |     if (unlikely(__pyx_v_descr-&gt;fields == Py_None)) {
+        |                  ~~~~~~~~~~~~~  ^
+  minepy/mine.c:879:43: note: expanded from macro 'unlikely'
+    879 |   #define unlikely(x) __builtin_expect(!!(x), 0)
+        |                                           ^
+  minepy/mine.c:6413:53: error: no member named 'fields' in 'struct _PyArray_Descr'
+   6413 |     __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_descr-&gt;fields, __pyx_v_childname); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 851, __pyx_L1_error)
+        |                                      ~~~~~~~~~~~~~  ^
+  minepy/mine.c:6614:81: error: no member named 'elsize' in 'struct _PyArray_Descr'
+   6614 |     (__pyx_v_offset[__pyx_t_8]) = ((__pyx_v_offset[__pyx_t_8]) + __pyx_v_child-&gt;elsize);
+        |                                                                  ~~~~~~~~~~~~~  ^
+  1 warning and 7 errors generated.
+  error: command '/usr/bin/clang' failed with exit code 1
+  ----------------------------------------
+  ERROR: Failed building wheel for minepy
+  Running setup.py clean for minepy
+Failed to build minepy
+Installing collected packages: minepy
+    Running setup.py install for minepy ... - \ error
+    ERROR: Command errored out with exit status 1:
+     command: /Library/Developer/CommandLineTools/usr/bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/setup.py'"'"'; __file__='"'"'/private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record /private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-record-rr5r1hhc/install-record.txt --single-version-externally-managed --user --prefix= --compile --install-headers /Users/amansharma/Library/Python/3.9/include/python3.9/minepy
+         cwd: /private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/
+    Complete output (59 lines):
+    running install
+    running build
+    running build_py
+    creating build
+    creating build/lib.macosx-10.9-universal2-3.9
+    creating build/lib.macosx-10.9-universal2-3.9/minepy
+    copying minepy/__init__.py -&gt; build/lib.macosx-10.9-universal2-3.9/minepy
+    running build_ext
+    building 'minepy.mine' extension
+    creating build/temp.macosx-10.9-universal2-3.9
+    creating build/temp.macosx-10.9-universal2-3.9/libmine
+    creating build/temp.macosx-10.9-universal2-3.9/minepy
+    clang -Wno-unused-result -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -fwrapv -O3 -Wall -iwithsysroot/System/Library/Frameworks/System.framework/PrivateHeaders -iwithsysroot/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Headers -arch arm64 -arch x86_64 -Werror=implicit-function-declaration -Wno-error=unreachable-code -Wno-error=unused-but-set-variable -Wno-error=cast-function-type-mismatch -Wno-unknown-warning-option -I/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9 -I/Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include -c libmine/mine.c -o build/temp.macosx-10.9-universal2-3.9/libmine/mine.o -Wall
+    clang -Wno-unused-result -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -fwrapv -O3 -Wall -iwithsysroot/System/Library/Frameworks/System.framework/PrivateHeaders -iwithsysroot/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Headers -arch arm64 -arch x86_64 -Werror=implicit-function-declaration -Wno-error=unreachable-code -Wno-error=unused-but-set-variable -Wno-error=cast-function-type-mismatch -Wno-unknown-warning-option -I/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9 -I/Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include -c minepy/mine.c -o build/temp.macosx-10.9-universal2-3.9/minepy/mine.o -Wall
+    In file included from minepy/mine.c:687:
+    In file included from /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/arrayobject.h:5:
+    In file included from /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/ndarrayobject.h:12:
+    In file included from /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/ndarraytypes.h:1909:
+    /Users/amansharma/Library/Python/3.9/lib/python/site-packages/numpy/_core/include/numpy/npy_1_7_deprecated_api.h:17:2: warning: "Using deprecated NumPy API, disable it with "          "#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-W#warnings]
+       17 | #warning "Using deprecated NumPy API, disable it with " \
+          |  ^
+    minepy/mine.c:6287:41: error: no member named 'subarray' in 'struct _PyArray_Descr'
+     6287 |     __Pyx_INCREF(((PyObject*)__pyx_v_d-&gt;subarray-&gt;shape));
+          |                              ~~~~~~~~~  ^
+    minepy/mine.c:1294:37: note: expanded from macro '__Pyx_INCREF'
+     1294 |   #define __Pyx_INCREF(r) Py_INCREF(r)
+          |                                     ^
+    /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9/object.h:411:49: note: expanded from macro 'Py_INCREF'
+      411 | #define Py_INCREF(op) _Py_INCREF(_PyObject_CAST(op))
+          |                                                 ^~
+    /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/include/python3.9/object.h:112:41: note: expanded from macro '_PyObject_CAST'
+      112 | #define _PyObject_CAST(op) ((PyObject*)(op))
+          |                                         ^~
+    minepy/mine.c:6288:38: error: no member named 'subarray' in 'struct _PyArray_Descr'
+     6288 |     __pyx_r = ((PyObject*)__pyx_v_d-&gt;subarray-&gt;shape);
+          |                           ~~~~~~~~~  ^
+    minepy/mine.c:6386:31: error: no member named 'names' in 'struct _PyArray_Descr'
+     6386 |   if (unlikely(__pyx_v_descr-&gt;names == Py_None)) {
+          |                ~~~~~~~~~~~~~  ^
+    minepy/mine.c:879:43: note: expanded from macro 'unlikely'
+      879 |   #define unlikely(x) __builtin_expect(!!(x), 0)
+          |                                           ^
+    minepy/mine.c:6390:30: error: no member named 'names' in 'struct _PyArray_Descr'
+     6390 |   __pyx_t_1 = __pyx_v_descr-&gt;names; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+          |               ~~~~~~~~~~~~~  ^
+    minepy/mine.c:6409:33: error: no member named 'fields' in 'struct _PyArray_Descr'
+     6409 |     if (unlikely(__pyx_v_descr-&gt;fields == Py_None)) {
+          |                  ~~~~~~~~~~~~~  ^
+    minepy/mine.c:879:43: note: expanded from macro 'unlikely'
+      879 |   #define unlikely(x) __builtin_expect(!!(x), 0)
+          |                                           ^
+    minepy/mine.c:6413:53: error: no member named 'fields' in 'struct _PyArray_Descr'
+     6413 |     __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_descr-&gt;fields, __pyx_v_childname); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 851, __pyx_L1_error)
+          |                                      ~~~~~~~~~~~~~  ^
+    minepy/mine.c:6614:81: error: no member named 'elsize' in 'struct _PyArray_Descr'
+     6614 |     (__pyx_v_offset[__pyx_t_8]) = ((__pyx_v_offset[__pyx_t_8]) + __pyx_v_child-&gt;elsize);
+          |                                                                  ~~~~~~~~~~~~~  ^
+    1 warning and 7 errors generated.
+    error: command '/usr/bin/clang' failed with exit code 1
+    ----------------------------------------
+ERROR: Command errored out with exit status 1: /Library/Developer/CommandLineTools/usr/bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/setup.py'"'"'; __file__='"'"'/private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-install-9giykg3t/minepy_3b7118ca3cba41cab33e77fb2b359a61/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' install --record /private/var/folders/sr/9gqlhfpn2y52tlmvy6thqryc0000gn/T/pip-record-rr5r1hhc/install-record.txt --single-version-externally-managed --user --prefix= --compile --install-headers /Users/amansharma/Library/Python/3.9/include/python3.9/minepy Check the logs for full command output.
+WARNING: You are using pip version 21.2.4; however, version 25.1.1 is available.
+You should consider upgrading via the '/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip' command.
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: pyyaml in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (6.0.2)
+WARNING: You are using pip version 21.2.4; however, version 25.1.1 is available.
+You should consider upgrading via the '/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip' command.
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: nbformat in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (5.10.4)
+Requirement already satisfied: nbclient in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (0.10.2)
+Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from nbformat) (2.21.1)
+Requirement already satisfied: jsonschema&gt;=2.6 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from nbformat) (4.24.0)
+Requirement already satisfied: jupyter-core!=5.0.*,&gt;=4.12 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from nbformat) (5.8.1)
+Requirement already satisfied: traitlets&gt;=5.1 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from nbformat) (5.14.3)
+Requirement already satisfied: jupyter-client&gt;=6.1.12 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from nbclient) (8.6.3)
+Requirement already satisfied: attrs&gt;=22.2.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jsonschema&gt;=2.6-&gt;nbformat) (25.3.0)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jsonschema&gt;=2.6-&gt;nbformat) (2025.4.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jsonschema&gt;=2.6-&gt;nbformat) (0.36.2)
+Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jsonschema&gt;=2.6-&gt;nbformat) (0.25.1)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient) (2.9.0.post0)
+Requirement already satisfied: importlib-metadata&gt;=4.8.3 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient) (8.7.0)
+Requirement already satisfied: tornado&gt;=6.2 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient) (6.5.1)
+Requirement already satisfied: pyzmq&gt;=23.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient) (26.4.0)
+Requirement already satisfied: zipp&gt;=3.20 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from importlib-metadata&gt;=4.8.3-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient) (3.23.0)
+Requirement already satisfied: platformdirs&gt;=2.5 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from jupyter-core!=5.0.*,&gt;=4.12-&gt;nbformat) (4.3.8)
+Requirement already satisfied: six&gt;=1.5 in /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages (from python-dateutil&gt;=2.8.2-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient) (1.15.0)
+Requirement already satisfied: typing-extensions&gt;=4.4.0 in /Users/amansharma/Library/Python/3.9/lib/python/site-packages (from referencing&gt;=0.28.4-&gt;jsonschema&gt;=2.6-&gt;nbformat) (4.14.0)
+WARNING: You are using pip version 21.2.4; however, version 25.1.1 is available.
+You should consider upgrading via the '/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip' command.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="0531dae8" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df[[<span class="st">'bill_length_mm'</span>, <span class="st">'flipper_length_mm'</span>]].dropna().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3ecbcad4" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> initialize_centroids(X, k):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[np.random.choice(X.shape[<span class="dv">0</span>], k, replace<span class="op">=</span><span class="va">False</span>)]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> assign_clusters(X, centroids):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    distances <span class="op">=</span> np.linalg.norm(X[:, np.newaxis] <span class="op">-</span> centroids, axis<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.argmin(distances, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update_centroids(X, labels, k):</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    new_centroids <span class="op">=</span> []</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        cluster_points <span class="op">=</span> X[labels <span class="op">==</span> i]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(cluster_points) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            new_centroids.append(X[np.random.randint(<span class="bu">len</span>(X))])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            new_centroids.append(cluster_points.mean(axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.vstack(new_centroids)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_iteration(X, centroids, labels, iteration):</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(centroids)):</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        plt.scatter(X[labels <span class="op">==</span> i, <span class="dv">0</span>], X[labels <span class="op">==</span> i, <span class="dv">1</span>], label<span class="op">=</span><span class="ss">f'Cluster </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    plt.scatter(centroids[:, <span class="dv">0</span>], centroids[:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'black'</span>, marker<span class="op">=</span><span class="st">'x'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"K-Means Iteration </span><span class="sc">{</span>iteration<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Bill Length (mm)"</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Flipper Length (mm)"</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="99aa78a7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_kmeans(X, k<span class="op">=</span><span class="dv">3</span>, max_iter<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    centroids <span class="op">=</span> initialize_centroids(X, k)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iteration <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, max_iter <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        labels <span class="op">=</span> assign_clusters(X, centroids)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        plot_iteration(X, centroids, labels, iteration)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        new_centroids <span class="op">=</span> update_centroids(X, labels, k)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.allclose(centroids, new_centroids):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        centroids <span class="op">=</span> new_centroids</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> centroids, labels</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>final_centroids, final_labels <span class="op">=</span> my_kmeans(X, k<span class="op">=</span><span class="dv">3</span>, max_iter<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-1.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-2.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-3.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-4.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-5.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-6.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-7.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-8.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-5-output-9.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="comparing-to-built-in-k-means" class="level4">
+<h4 class="anchored" data-anchor-id="comparing-to-built-in-k-means">COMPARING TO BUILT-IN K MEANS</h4>
+<div id="696541d6" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">1</span>, n_init<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>kmeans_labels <span class="op">=</span> kmeans.fit_predict(X)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[:, <span class="dv">0</span>], X[:, <span class="dv">1</span>], c<span class="op">=</span>kmeans_labels, cmap<span class="op">=</span><span class="st">'Accent'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(kmeans.cluster_centers_[:, <span class="dv">0</span>], kmeans.cluster_centers_[:, <span class="dv">1</span>],</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">'black'</span>, marker<span class="op">=</span><span class="st">'x'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Built-in scikit-learn KMeans"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Bill Length (mm)"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Flipper Length (mm)"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-6-output-1.png" width="519" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both our custom version and the sklearn.KMeans function produce clusters that look quite similar. The built-in version reaches its result more quickly since it is optimized and includes helpful features like <code>inertia_</code> and control over <code>n_init</code>. On the other hand, our manual implementation is more transparent and educational, making it easier to see how the centroids move and how the data points are assigned step by step.</p>
+</section>
+<section id="k-selection---wcss-and-silhouette-scores" class="level4">
+<h4 class="anchored" data-anchor-id="k-selection---wcss-and-silhouette-scores">K Selection - WCSS and Silhouette Scores</h4>
+<p>To determine the best number of clusters for our K-Means model, we used two popular evaluation metrics: Within-Cluster Sum of Squares (WCSS) and Silhouette Score. WCSS measures how tightly the points in each cluster are grouped, while the Silhouette Score indicates how distinct the clusters are from one another.</p>
+<p>We tested K values ranging from 2 to 7, calculating both metrics for each. The chart below presents these results side by side, making it easier to spot the most suitable number of clusters.</p>
+<div id="cf7c3417" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df[[<span class="st">'bill_length_mm'</span>, <span class="st">'flipper_length_mm'</span>]].dropna().to_numpy()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>k_values <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">8</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>wcss <span class="op">=</span> []</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>silhouette_scores <span class="op">=</span> []</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over K values</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> k_values:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, random_state<span class="op">=</span><span class="dv">1</span>, n_init<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> kmeans.fit_predict(data)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Total within-cluster sum of squares</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    wcss.append(kmeans.inertia_)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Silhouette score</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> silhouette_score(data, labels)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    silhouette_scores.append(score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f9b14372" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.plot(k_values, wcss, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Elbow Method: WCSS vs K"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Clusters (K)"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Within-Cluster Sum of Squares (WCSS)"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-8-output-1.png" width="536" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="526a910d" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.plot(k_values, silhouette_scores, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Silhouette Score vs K"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Clusters (K)"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average Silhouette Score"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-9-output-1.png" width="531" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To determine the appropriate number of clusters (K) for the penguins dataset, I evaluated two key metrics across K = 2 to 7:</p>
+<ol type="1">
+<li><p>Elbow Method (WCSS) The Elbow Plot shows how the total within-cluster sum of squares decreases as K increases. We observe a sharp drop from K=2 to K=3, followed by a more gradual decrease thereafter. This suggests that K=3 might be a natural “elbow point,” beyond which adding more clusters yields diminishing returns in terms of compactness.</p></li>
+<li><p>Silhouette Score The Silhouette Score measures how well each point fits within its assigned cluster. A higher score indicates more distinct and well-separated clusters. In this case, the silhouette score peaks at K=2, then declines steadily as more clusters are added. This suggests that K=2 results in the clearest, most compact separation between clusters.</p></li>
+</ol>
+<ul>
+<li><strong>K=2</strong> yields the <strong>best silhouette score</strong>, meaning the clusters are highly distinct.</li>
+<li><strong>K=3</strong> gives a good balance according to the <strong>elbow method</strong>, suggesting a more nuanced segmentation without overfitting. Depending on the goal, both K=2 and K=3 are defensible. For simplicity and separation, K=2 is optimal. For more detailed segmentation, K=3 is a reasonable choice.</li>
+</ul>
+</section>
+</section>
+<section id="a.-k-nearest-neighbors" class="level2">
+<h2 class="anchored" data-anchor-id="a.-k-nearest-neighbors">2a. K Nearest Neighbors</h2>
+<p>In this section, we apply and examine the K-Nearest Neighbors (KNN) classification algorithm using a synthetic dataset. The dataset includes a nonlinear decision boundary, which makes it well-suited for showcasing KNN’s strength in handling flexible, non-parametric classification problems.</p>
+<div id="8fc42fd4" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of observations</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate features</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, size<span class="op">=</span>n)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, size<span class="op">=</span>n)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Wiggly decision boundary</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>boundary <span class="op">=</span> np.sin(<span class="dv">4</span> <span class="op">*</span> x1) <span class="op">+</span> x1</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (x2 <span class="op">&gt;</span> boundary).astype(<span class="bu">int</span>)  <span class="co"># 1 if above boundary, else 0</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>dat <span class="op">=</span> pd.DataFrame({<span class="st">'x1'</span>: x1, <span class="st">'x2'</span>: x2, <span class="st">'y'</span>: y})</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(dat.head())</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>plt.scatter(dat[<span class="st">'x1'</span>], dat[<span class="st">'x2'</span>], c<span class="op">=</span>dat[<span class="st">'y'</span>], cmap<span class="op">=</span><span class="st">'bwr'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>x_vals <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">300</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>plt.plot(x_vals, np.sin(<span class="dv">4</span> <span class="op">*</span> x_vals) <span class="op">+</span> x_vals, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Boundary'</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x1"</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"x2"</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Synthetic Data with Nonlinear Decision Boundary"</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         x1        x2  y
+0 -0.752759 -2.811425  0
+1  2.704286  0.818462  0
+2  1.391964 -1.113864  0
+3  0.591951  0.051424  0
+4 -2.063888  2.445399  1</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-10-output-2.png" width="513" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The scatter plot shows synthetic data with two features, x1 and x2, used to classify points into two classes: red and blue. The dashed line represents the true nonlinear decision boundary, which separates the classes based on a complex relationship between x1 and x2.</p>
+<div id="97abd774" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot colored by class label y</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(dat[<span class="st">'x1'</span>], dat[<span class="st">'x2'</span>], c<span class="op">=</span>dat[<span class="st">'y'</span>], cmap<span class="op">=</span><span class="st">'bwr'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>x_vals <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">300</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>boundary <span class="op">=</span> np.sin(<span class="dv">4</span> <span class="op">*</span> x_vals) <span class="op">+</span> x_vals</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x_vals, boundary, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Boundary'</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Styling</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x1"</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"x2"</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Synthetic Dataset Colored by y"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-11-output-1.png" width="513" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="generating-the-test-dataset-different-seed" class="level4">
+<h4 class="anchored" data-anchor-id="generating-the-test-dataset-different-seed">Generating the Test Dataset (Different Seed)</h4>
+<p>To assess the performance of our KNN classifier on new data, we created a separate test dataset using the same generation process as the training set, but with a different random seed. This approach keeps the true decision boundary consistent while introducing different data points, simulating a real-world situation where the model encounters previously unseen samples.</p>
+<div id="29e6da5d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a different seed for test data</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of test points</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>n_test <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate features</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>x1_test <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, size<span class="op">=</span>n_test)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>x2_test <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, size<span class="op">=</span>n_test)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Wiggly decision boundary</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>boundary_test <span class="op">=</span> np.sin(<span class="dv">4</span> <span class="op">*</span> x1_test) <span class="op">+</span> x1_test</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> (x2_test <span class="op">&gt;</span> boundary_test).astype(<span class="bu">int</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create test DataFrame</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>test_dat <span class="op">=</span> pd.DataFrame({<span class="st">'x1'</span>: x1_test, <span class="st">'x2'</span>: x2_test, <span class="st">'y'</span>: y_test})</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_dat.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         x1        x2  y
+0  1.178815  0.078769  0
+1 -1.283164  0.999747  1
+2 -1.638891 -2.364549  0
+3  0.307889 -2.214630  0
+4  1.316814 -1.068116  0</code></pre>
+</div>
+</div>
+<div id="6091471a" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euclidean_distance(p1, p2):</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(np.<span class="bu">sum</span>((p1 <span class="op">-</span> p2) <span class="op">**</span> <span class="dv">2</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn_predict(X_train, y_train, X_test, k<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> []</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> test_point <span class="kw">in</span> X_test:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        distances <span class="op">=</span> [euclidean_distance(test_point, train_point) <span class="cf">for</span> train_point <span class="kw">in</span> X_train]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get indices of k nearest neighbors</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        k_indices <span class="op">=</span> np.argsort(distances)[:k]</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the majority class</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        k_labels <span class="op">=</span> y_train[k_indices]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        most_common <span class="op">=</span> Counter(k_labels).most_common(<span class="dv">1</span>)[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        predictions.append(most_common)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7b0b3e6f" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract training features and labels</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> dat[[<span class="st">'x1'</span>, <span class="st">'x2'</span>]].to_numpy()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> dat[<span class="st">'y'</span>].to_numpy()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract test features</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> test_dat[[<span class="st">'x1'</span>, <span class="st">'x2'</span>]].to_numpy()</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict using manual KNN</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>manual_preds <span class="op">=</span> knn_predict(X_train, y_train, X_test, k<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="validating-k-nearest-neighbors" class="level4">
+<h4 class="anchored" data-anchor-id="validating-k-nearest-neighbors">Validating K-Nearest Neighbors</h4>
+<div id="4cb53331" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use scikit-learn for validation</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>knn_model <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>knn_model.fit(X_train, y_train)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>sklearn_preds <span class="op">=</span> knn_model.predict(X_test)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy comparison</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Manual KNN Accuracy:"</span>, accuracy_score(test_dat[<span class="st">'y'</span>], manual_preds))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"scikit-learn KNN Accuracy:"</span>, accuracy_score(test_dat[<span class="st">'y'</span>], sklearn_preds))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if predictions match</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>match <span class="op">=</span> np.<span class="bu">all</span>(manual_preds <span class="op">==</span> sklearn_preds)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Do manual and sklearn predictions match exactly?"</span>, match)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Manual KNN Accuracy: 0.92
+scikit-learn KNN Accuracy: 0.92
+Do manual and sklearn predictions match exactly? True</code></pre>
+</div>
+</div>
+<p>Your manual KNN implementation is <strong>correct and reliable</strong>:</p>
+<ul>
+<li><p>Both our custom algorithm and scikit-learn’s <code>KNeighborsClassifier</code> achieved <strong>92% accuracy</strong> on the test set.</p></li>
+<li><p>The predictions from both methods <strong>match exactly</strong>, confirming our distance calculation, majority vote logic, and implementation are spot on.</p></li>
+</ul>
+<p>Our manual KNN model performs identically to the industry-standard version, successfully classifying nonlinear data with high accuracy.</p>
+</section>
+<section id="knn-accuracy-sweep-k-1-to-30" class="level4">
+<h4 class="anchored" data-anchor-id="knn-accuracy-sweep-k-1-to-30">KNN Accuracy Sweep (k = 1 to 30)</h4>
+<div id="d81e28e3" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Store accuracies for each k</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>accuracies <span class="op">=</span> []</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over k from 1 to 30</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>):</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> knn_predict(X_train, y_train, X_test, k<span class="op">=</span>k)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> accuracy_score(test_dat[<span class="st">'y'</span>], preds)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    accuracies.append(acc)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot accuracy vs k</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>), accuracies, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"KNN Accuracy on Test Set vs k"</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"k (Number of Neighbors)"</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Accuracy"</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>plt.xticks(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>))</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="fl">1.05</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-16-output-1.png" width="663" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="choosing-the-best-k-for-knn" class="level4">
+<h4 class="anchored" data-anchor-id="choosing-the-best-k-for-knn">Choosing the Best k for KNN</h4>
+<p>To find the optimal value of <strong>k</strong> in the K-Nearest Neighbors algorithm, I evaluated test accuracy across values from <strong>k = 1 to 30</strong>. The resulting plot shows how accuracy changes with different numbers of neighbors.</p>
+</section>
+<section id="what-the-plot-tells-us" class="level4">
+<h4 class="anchored" data-anchor-id="what-the-plot-tells-us">What the Plot Tells Us</h4>
+<ul>
+<li><strong>Overall accuracy is high across all k values</strong>, consistently above 90%, which indicates the model is robust to the choice of <code>k</code> on this dataset.</li>
+<li>The <strong>peak accuracy appears around k = 6</strong>, suggesting that using 6 nearest neighbors yields the best generalization to the test data.</li>
+<li>For very low values of <code>k</code> (like k=1), the model may overfit — capturing noise in the training data.</li>
+<li>For higher values of <code>k</code>, the model becomes more biased (smoother boundary), and accuracy slightly drops.</li>
+</ul>
+</section>
+<section id="conclusion" class="level4">
+<h4 class="anchored" data-anchor-id="conclusion">Conclusion</h4>
+<p><strong>k = 6</strong> is the sweet spot for this dataset, offering the best balance between overfitting and underfitting. It’s the value I would choose for deploying this KNN model on new, unseen data.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
